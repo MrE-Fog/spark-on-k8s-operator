@@ -69,7 +69,7 @@ func newFakeController(app *v1beta2.SparkApplication, jobManager submissionJobMa
 
 	podInformerFactory := informers.NewSharedInformerFactory(kubeClient, 0*time.Second)
 	controller := newSparkApplicationController(crdClient, kubeClient, informerFactory, podInformerFactory, recorder,
-		&util.MetricConfig{}, "", nil)
+		&util.MetricConfig{}, "", nil, true)
 	controller.subJobManager = jobManager
 	informer := informerFactory.Sparkoperator().V1beta2().SparkApplications().Informer()
 	if app != nil {
