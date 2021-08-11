@@ -61,7 +61,7 @@ var (
 	enableWebhook                  = flag.Bool("enable-webhook", false, "Whether to enable the mutating admission webhook for admitting and patching Spark pods.")
 	enableResourceQuotaEnforcement = flag.Bool("enable-resource-quota-enforcement", false, "Whether to enable ResourceQuota enforcement for SparkApplication resources. Requires the webhook to be enabled.")
 	ingressURLFormat               = flag.String("ingress-url-format", "", "Ingress URL format.")
-	enableUIService                = flag.Bool("enable-ui-service", false, "Enable Spark service UI.")
+	enableUIService                = flag.Bool("enable-ui-service", true, "Enable Spark service UI.")
 	enableLeaderElection           = flag.Bool("leader-election", false, "Enable Spark operator leader election.")
 	leaderElectionLockNamespace    = flag.String("leader-election-lock-namespace", "spark-operator", "Namespace in which to create the ConfigMap for leader election.")
 	leaderElectionLockName         = flag.String("leader-election-lock-name", "spark-operator-lock", "Name of the ConfigMap for leader election.")
