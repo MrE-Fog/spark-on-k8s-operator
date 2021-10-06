@@ -155,7 +155,7 @@ func (spm *realClientModeSubmissionPodManager) createClientDriverPod(app *v1beta
 	// add Tolerations
 	var tolerations []corev1.Toleration
 	if val, ok := app.Spec.SparkConf["spark.kubernetes.node.selector.beta.kubernetes.io/arch"]; ok && val == "arm64" {
-		armToleration := v1.Toleration{
+		armToleration := corev1.Toleration{
 			Key:    "lyft.net/arch-restricted",
 			Value:  "arm64",
 			Effect: "NoSchedule",
