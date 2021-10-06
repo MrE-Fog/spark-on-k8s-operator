@@ -152,6 +152,17 @@ func (spm *realClientModeSubmissionPodManager) createClientDriverPod(app *v1beta
 		}
 	}
 
+	// add Tolerations
+	var tolerations []corev1.Toleration
+	if val, ok := app.Spec.SparkConf["spark.kubernetes.node.selector.beta.kubernetes.io/arch"]; ok && val == "arm64" {
+		armToleration := v1.Toleration{
+			Key:    "lyft.net/arch-restricted",
+			Value:  "arm64",
+			Effect: "NoSchedule",
+		}
+		tolerations = append(tolerations, armToleration)
+	}
+
 	//append all volumes
 	var volumes []corev1.Volume
 	var volumeMounts []corev1.VolumeMount
@@ -192,6 +203,7 @@ func (spm *realClientModeSubmissionPodManager) createClientDriverPod(app *v1beta
 			ImagePullSecrets: imagePullSecrets,
 			Volumes:          volumes,
 			NodeSelector:     nodeSelectors,
+			Tolerations:      tolerations,
 			Containers: []corev1.Container{
 				{
 					Name:            "spark-kubernetes-driver",
